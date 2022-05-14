@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inject>
+    <crt_object ids="a" class="test.TestXML.Dao.DaoImpl"/>
+    <crt_object ids="b" class="test.TestXML.Dao.DaoImpl"/>
+    <crt_object ids="c" class="test.TestXML.DaoV2.DaoV2Impl"/>
+
+    <crt_object ids="d" class="test.TestXML.Metier.MetierImplConstructor">
+        <by_constructor_arg name="dao" values="a"/>
+        <by_constructor_arg name="dao" values="b"/>
+        <by_constructor_arg name="dao" values="c"/>
+    </crt_object>
+
+    <crt_object ids="k" class="test.TestXML.Metier.MetierImplConstructor">
+        <by_constructor_arg name="dao" values="a"/>
+        <by_constructor_arg name="dao" values="c"/>
+        <by_constructor_arg name="dao" values="b"/>
+    </crt_object>
+
+    <crt_object ids="e" class="test.TestXML.Metier.MetierImplSetter">
+        <by_setter names="dao1" idRefs="a"/>
+        <by_setter names="daoV2" idRefs="c"/>
+        <by_setter names="dao2" idRefs="b"/>
+    </crt_object>
+
+    <crt_object ids="f" class="test.TestXML.Metier.MetierImplField">
+        <by_field names="daoV2" values="c"/>
+        <by_field names="dao1" values="a"/>
+        <by_field names="dao2" values="b"/>
+    </crt_object>
+
+</inject>
