@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<inject>
+    <crt_object id="a b" class="aaa"/>
+    <crt_object id="b" class="aaa"/>
+    <crt_object id="qq" class="3qqq">
+        <by_constructor_arg  name="" value=""/>
+        <by_setter name="" idRef=""/>
+    </crt_object>
+</inject>
