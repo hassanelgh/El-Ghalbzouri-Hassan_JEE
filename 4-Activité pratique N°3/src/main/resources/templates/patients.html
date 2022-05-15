@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="mainTemplate"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.1.3/css/bootstrap.min.css">
+
+</head>
+<body>
+
+    <div layout:fragment="content1">
+        <div class="container mt-3">
+            <div class="card">
+                <div class="card-header">
+                    <h3>List Des Patients</h3>
+                </div>
+                <div class="card-body">
+                    <form method="get" th:action="@{/user/index(keyword=${keyWord},page=${currentPage})}">
+                        <label>key word</label>
+                        <input name="keyword" th:value="${keyWord}">
+                        <button type="submit" class="btn btn-primary"> Rechercher</button>
+                    </form>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nom</th>
+                            <th>Date</th>
+                            <th>Malade</th>
+                            <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="p:${listPatients}">
+                            <th th:text="${p.id}"/>
+                            <th th:text="${p.nom}"/>
+                            <th th:text="${p.dateNaissance}"/>
+                            <th th:text="${p.malade}"/>
+                            <th th:text="${p.score}"/>
+                            <td sec:authorize="hasRole('ADMIN')"><a onClick="return confirm('supprimer ??');" class="btn btn-danger"
+                                   th:href="@{/admin/delete(id=${p.id},keyword=${keyWord},page=${currentPage})}">Supprimer</a>
+                            </td>
+                            <td sec:authorize="hasRole('ADMIN')">
+                                <a class="btn btn-success" th:href="@{/admin/editPatient(id=${p.id},keyword=${keyWord},page=${currentPage})}">Edit</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <ul class="nav nav-pills w-100 justify-content-center">
+                        <li th:each="page:${pages}">
+                            <a th:class="${page==currentPage? 'btn btn-success mx-1': 'btn btn-outline-success mx-1'}"
+                               th:text="${page}"
+                               th:href="@{/user/index(keyword=${keyWord},page=${page})}"></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
